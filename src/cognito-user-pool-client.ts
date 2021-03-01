@@ -26,15 +26,17 @@ export interface CognitoUserPoolClientConfig extends cdktf.TerraformMetaArgument
   readonly analyticsConfiguration?: CognitoUserPoolClientAnalyticsConfiguration[];
 }
 export interface CognitoUserPoolClientAnalyticsConfiguration {
-  readonly applicationId: string;
-  readonly externalId: string;
-  readonly roleArn: string;
+  readonly applicationArn?: string;
+  readonly applicationId?: string;
+  readonly externalId?: string;
+  readonly roleArn?: string;
   readonly userDataShared?: boolean;
 }
 
 function cognitoUserPoolClientAnalyticsConfigurationToTerraform(struct?: CognitoUserPoolClientAnalyticsConfiguration): any {
   if (!cdktf.canInspect(struct)) { return struct; }
   return {
+    application_arn: cdktf.stringToTerraform(struct!.applicationArn),
     application_id: cdktf.stringToTerraform(struct!.applicationId),
     external_id: cdktf.stringToTerraform(struct!.externalId),
     role_arn: cdktf.stringToTerraform(struct!.roleArn),
